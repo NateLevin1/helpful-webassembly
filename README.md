@@ -1,7 +1,5 @@
 # Helpful WebAssembly
-<p align="center">
 Helper functions for WebAssembly Text Format.<br>Use them for making compilers or when you're just playing around with WAT.
-</p>
 
 ## Use
 
