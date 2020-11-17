@@ -1,6 +1,8 @@
 # Helpful WebAssembly
 Helper functions for WebAssembly Text Format. Use them for making compilers or when you're just playing around with WAT.
 
+Each function has a `name.wat` file, a `name.wasm` file and a `name-glue.js`. The glue code contains an object called `wasmImports` which contains the import object for the wasm.
+
 ## Use
 
 ### Copy and paste into the .wat file (Best for one file)
