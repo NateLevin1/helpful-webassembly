@@ -1,0 +1,24 @@
+{
+  "name": "helpful-webassembly",
+  "version": "1.0.0",
+  "description": "Helpful functions for WebAssembly Text Format.",
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "generate-html": "node ./scripts/build.js --generate-html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UltimatePro-Grammer/helpful-webassembly.git"
+  },
+  "keywords": [
+    "webassembly",
+    "wat",
+    "wasm"
+  ],
+  "author": "UltimateProGrammer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UltimatePro-Grammer/helpful-webassembly/issues"
+  },
+  "homepage": "https://github.com/UltimatePro-Grammer/helpful-webassembly#readme"
+}

@@ -26,6 +26,8 @@ const yourWasm2 = await WebAssembly.instantiateStreaming(fetch('your-wasm2.wasm'
 });
 ```
 
+## Development
+Use `npm run build` to build all `.wat` files to wasm. Use `npm run generate-html` to do the same but also generate HTML files that allow you to navigate through the folders.
 
 
 MIT License
