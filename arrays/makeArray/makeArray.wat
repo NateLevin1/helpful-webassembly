@@ -10,4 +10,6 @@
     (func $makeArray (param $newOffset i32) (param $arrayLength i32)
         (i32.store (local.get $newOffset) (local.get $arrayLength) ) ;; store length
     )
+
+    (export "makeArray" (func $makeArray))
 )

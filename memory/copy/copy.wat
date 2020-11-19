@@ -21,4 +21,6 @@
             br_if $l
         end
     )
+    
+    (export "copy" (func $copy))
 )

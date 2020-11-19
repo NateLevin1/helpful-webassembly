@@ -39,4 +39,6 @@
     
     local.get $newLength
   )
+
+  (export "strConcat" (func $strConcat))
 )

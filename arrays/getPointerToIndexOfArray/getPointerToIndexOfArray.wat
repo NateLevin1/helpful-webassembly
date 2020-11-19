@@ -18,4 +18,6 @@
         ;; the mul below is so that it increases the amount it needs to every time (e.g we don't end up indexing from the second byte of an i32)
         (return (i32.add (local.get $startOfArray) (i32.mul (local.get $index) (local.get $bytesInItem))) )
     )
+
+    (export "getPointerToIndexOfArray" (func $getPointerToIndexOfArray))
 )
