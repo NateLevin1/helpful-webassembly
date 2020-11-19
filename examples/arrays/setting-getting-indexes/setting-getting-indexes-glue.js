@@ -1,5 +1,12 @@
 var memory = new WebAssembly.Memory({initial:1});
 
+const errors = [
+"A generic error was thrown",
+"Segmentation fault (core dumped)",
+"Attempted to index out of an array's bounds",
+"Attempted to index out of an string's bounds"
+]
+
 const wasmInstance =
       new WebAssembly.Instance(wasmModule, {
       	console: {
@@ -24,7 +31,15 @@ const wasmInstance =
             }
         },
         js: {
-          memory
+          memory,
+          throw: (errNo)=>{
+          	throw errors[errNo];
+          },
+          throwString: (offset)=>{
+          	const length = new Int32Array(memory.buffer, offset, 1)[0];
+            const string = new TextDecoder("utf8").decode(new Uint8Array(memory.buffer, offset+4/*<- 4 is the length in Uint8s of an int32*/, length));
+            throw string;
+          }
         }
       });
 const { main } = wasmInstance.exports;

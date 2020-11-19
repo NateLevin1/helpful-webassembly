@@ -18,9 +18,36 @@
     ;; the mul below is so that it increases the amount it needs to every time (e.g we don't end up indexing from the second byte of an i32)
     (return (i32.add (local.get $startOfArray) (i32.mul (local.get $index) (local.get $bytesInItem))) )
   )
+  (;
+   Sets an i32 value at the specified array's index
+   @param arrayOffset {i32} Offset of the array in memory
+   @param index {i32} The index of the array that should have its value changed
+   @param newValue {i32} The value that should be set as the index's value
+  ;)
+  (func $setIndexI32 (param $arrayOffset i32) (param $index i32) (param $newValue i32)
+    local.get $arrayOffset
+    local.get $index
+    i32.const 4 ;; the number of bytes in an i32
+    call $getPointerToIndexOfArray ;; get the index
+    local.get $newValue
+    i32.store ;; store the number 1234 at the index
+  )
+  
+  (;
+   Gets an i32 value at the specified array's index
+   @param arrayOffset {i32} Offset of the array in memory
+   @param index {i32} The index of the array that should have its value got
+  ;)
+  (func $getIndexI32 (param $arrayOffset i32) (param $index i32) (result i32)
+    local.get $arrayOffset
+    local.get $index
+    i32.const 4 ;; the number of bytes in an i32
+    call $getPointerToIndexOfArray ;; get the index
+    i32.load ;; push the number at the index on to the stack
+  )
   
   (func (export "main")
-    ;; TODO: Exceptions (index out of bounds)
+    ;; TODO: errors (index out of bounds)
     
     ;; ARRAY SETUP
     i32.const 0 ;; array offset
@@ -30,17 +57,13 @@
     ;; SET VALUE AT INDEX
     i32.const 0 ;; offset
     i32.const 0 ;; index
-    i32.const 4 ;; sizeof i32
-    call $getPointerToIndexOfArray ;; get the index
-    i32.const 1234
-    i32.store ;; store the number 1234 at the index
+    i32.const 1234 ;; new value
+    call $setIndexI32
     
     ;; GET VALUE AT INDEX
     i32.const 0 ;; offset
     i32.const 0 ;; index
-    i32.const 4 ;; sizeof i32
-    call $getPointerToIndexOfArray ;; get the index
-    i32.load ;; push the index's value onto the stack
+    call $getIndexI32
     call $console.logInt ;; log the value
     
     
