@@ -2,6 +2,9 @@
     ;; import memory
     (import "js" "memory" (memory 1))
 
+    ;; import getPointerToIndexOfArray func
+    (import "wasm" "getPointerToIndexOfArray" (func $getPointerToIndexOfArray (param i32 i32 i32)(result i32)))
+
     (;
      Sets an i32 value at the specified array's index
      @param arrayOffset {i32} Offset of the array in memory
