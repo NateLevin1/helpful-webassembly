@@ -17,7 +17,7 @@
 
      @depends-on copy
     ;)
-    (func $strConcat 
+  (func $strConcat 
     (param $offset1 i32) (param $length1 i32)
     (param $offset2 i32) (param $length2 i32)
     (param $newOffset i32) (result i32)
@@ -28,14 +28,14 @@
     local.get $newOffset
     local.get $length1
     call $copy
-    (i32.add (i32.const 1) (local.get $offset2) )
+    (i32.add (i32.const 4) (local.get $offset2) ) ;; the const 4 is the size of a length indicator
     (i32.add (local.get $newOffset) (i32.add (i32.const 4 (; size of the length int ;) ) (local.get $length1)) )
     local.get $length2
     call $copy
     
     (local.set $newLength (i32.add (local.get $length1) (local.get $length2)) )
     
-    (i32.store (local.get $newOffset) (i32.add (local.get $newLength) (i32.const 4)) )
+    (i32.store (local.get $newOffset) (local.get $newLength)) 
     
     local.get $newLength
   )
