@@ -1,3 +1,5 @@
+const memory = new WebAssembly.Memory({initial:1});
+
 const wasmImports = {
     console: {
         logString: (offset) => {
@@ -14,10 +16,14 @@ const wasmImports = {
     }
 }
 
-const memory = new WebAssembly.Memory({initial:1});
-
-WebAssembly.instantiateStreaming(fetch('fizzbuzz.wasm'), wasmImports).then((wasmInstance) => {
-    const { main } = wasmInstance.exports;
+const runWasmInstance = (wasmInstance) => {
+    const { main } = wasmInstance.instance.exports;
     main();
     // logs fizzbuzz to the console
-});
+}
+
+fetch('fizzbuzz.wasm').then(response =>
+    response.arrayBuffer()
+).then(bytes =>
+    WebAssembly.instantiate(bytes, wasmImports)
+).then(runWasmInstance);
