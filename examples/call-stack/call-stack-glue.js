@@ -1,5 +1,7 @@
 var memory = new WebAssembly.Memory({initial:1});
 
+const fs = require("fs");
+
 const errors = [
 "A generic error was thrown",
 "Segmentation fault (core dumped)",
@@ -8,7 +10,7 @@ const errors = [
 ]
 
 const wasmInstance =
-      new WebAssembly.Instance(wasmModule, {
+      WebAssembly.instantiate(new Uint8Array(fs.readFileSync("./call-stack.wasm")), {
       	console: {
           	logStringWithLength: (offset, length)=>{
               	const string = new TextDecoder("utf8").decode(new Uint8Array(memory.buffer, offset+4/*<- 4 is the length in Uint8s of an int32*/, length));
@@ -27,7 +29,7 @@ const wasmInstance =
               console.log(int)
             },
           	debugMemory: ()=>{
-              console.log("memory: "+new Int32Array(memory.buffer, 0));
+              console.log("memory: "+new Int32Array(memory.buffer, 0, 60));
             }
         },
         js: {
@@ -41,6 +43,7 @@ const wasmInstance =
             throw string;
           }
         }
+      }).then(({ instance })=>{
+        const { main } = instance.exports;
+        main();
       });
-const { main } = wasmInstance.exports;
-main();
