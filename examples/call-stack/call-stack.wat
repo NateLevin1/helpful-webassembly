@@ -49,6 +49,7 @@
         ;; DEBUG ABOVE! (REMOVE FOR PROD)
 
         ;; the previous frame's location is the first 4 bytes of the current frame
+        (global.set $STACK_POINTER (global.get $FRAME_POINTER) )
         (global.set $FRAME_POINTER (i32.load (global.get $FRAME_POINTER)) )
     )
     (func $stackAllocate
