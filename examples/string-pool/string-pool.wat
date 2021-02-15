@@ -3,7 +3,7 @@
     ;; helloworldworld100.5100
     (import "js" "memory" (memory 1))
     (import "js" "newString" (func $js.newString (param $dataOffset i32) (result i32)))
-    (import "js" "appendToString" (func $js.appendToString (param $poolIndex i32) (param $addType i32) (param $addValue i32)))
+    (import "js" "appendToString" (func $js.appendToString (param $addType i32) (param $poolIndex i32) (param $addValue i32)))
     (import "js" "printString" (func $js.printString (param $poolIndex i32)))
     (func (export "main")
         (local i32 i32)
